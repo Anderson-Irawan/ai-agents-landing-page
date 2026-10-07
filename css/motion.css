@@ -1,0 +1,76 @@
+/* Flux: hero motion, Option B (Lively), locked by Anderson 2026-10-07.
+   See Flux - Motion Spec.md and the brief's Motion spec section.
+   Scoped to .js .reveal per rule: if JS fails to run and add the js class
+   to <html>, content stays visible with no hidden starting state at all. */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* CTA hover and press feedback. Only active once .is-settled is on the
+   element (added by JS on the entrance's opacity transitionend), so the
+   entrance itself always plays at the values above and never gets
+   interrupted or sped up by the hover transition. */
+.js .hero__cta.reveal.is-settled {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.js .hero__cta.reveal.is-settled:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.js .hero__cta.reveal.is-settled:active {
+  transform: scale(0.96);
+  transition: transform 0.1s linear;
+}
+
+/* Status dot pulse, beside the wordmark. Reads "alive and listening".
+   JS pauses this via the animations-paused class when the tab is hidden. */
+.status-dot {
+  animation: statusPulse 2s ease-in-out infinite alternate;
+}
+
+html.animations-paused .status-dot {
+  animation-play-state: paused;
+}
+
+@keyframes statusPulse {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* Reduced motion: no transforms, no ambient loop. Entrance becomes an
+   opacity-only fade (still a transition, not a pop) per rule 4. */
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    transform: none;
+    transition: opacity 0.3s linear;
+  }
+
+  .js .hero__cta.reveal.is-settled,
+  .js .hero__cta.reveal.is-settled:hover,
+  .js .hero__cta.reveal.is-settled:active {
+    transform: none;
+    transition: none;
+  }
+
+  .status-dot {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

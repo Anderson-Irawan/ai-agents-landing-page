@@ -1,0 +1,167 @@
+/* Agency Roster, production hero. Colour, type and layout locked from
+   color-variants.html panel "Picked: B + C" (variant--bc). Do not change hexes. */
+
+:root {
+  --paper: #F7F3EC;
+  --surface: #EAE2D3;
+  --ink: #201C16;
+  --muted: #6E6459;
+  --indigo: #2F3B63;
+  --mustard: #8F5F17;
+  --terracotta: #B5502E;
+  --sage: #4B6B3F;
+  --tint: #E7DCC4;
+  --gold: #E8C06A;
+  --mist: #C9CDE0;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'General Sans', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+a { color: inherit; }
+
+/* Focus state for keyboard users, every link in the hero */
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Hero: indigo stage, full first viewport.
+   100svh instead of 100vh so mobile Safari's address bar doesn't jump the page. */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.75rem;
+  background: var(--indigo);
+}
+
+.hero__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--mist);
+}
+.hero__wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--paper);
+  font-weight: 600;
+}
+.hero__links a {
+  color: inherit;
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  /* Pulse animation owned by Flux, not added here */
+}
+
+/* Split: copy on the left, credits roll on the right, like the mock's variant--bc */
+.hero__split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero__body { margin: auto 0; }
+
+.hero__rule {
+  height: 2px;
+  width: 2.5rem;
+  background: var(--gold);
+  margin-bottom: 1rem;
+}
+
+/* Fluid title: scales with viewport width, clamped between mobile and the mock's 4.2rem-at-1100px proportion */
+.hero__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 2rem + 3.5vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+  margin: 0 0 0.75rem;
+}
+
+.hero__subline {
+  font-size: 1.1rem;
+  color: var(--mist);
+  margin: 0 0 1.5rem;
+  max-width: 30rem;
+}
+
+.hero__cta--button {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* Credits roll */
+.credits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.credit {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.9rem 1.1rem;
+  color: var(--paper);
+  border-radius: 4px;
+}
+.credit__role {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+}
+.credit__name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.credit--ter { background: var(--terracotta); }
+.credit--gold { background: var(--gold); color: var(--ink); }
+.credit--sag { background: var(--sage); }
+.credit--pap { background: var(--paper); color: var(--ink); }
+
+/* Under 800px: credits stack below the copy instead of sitting beside it */
+@media (max-width: 800px) {
+  .hero__split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    /* Anderson: credits sit close under the CTA. Group both rows and centre
+       them, instead of letting the two rows stretch apart to fill 100svh. */
+    align-content: center;
+  }
+  .hero__body { margin: 0; }
+}
+
+.page {
+  /* Placeholder for the next sections, built one pass at a time */
+}
