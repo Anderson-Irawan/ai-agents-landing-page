@@ -99,14 +99,7 @@ a:focus-visible {
   line-height: 1;
   letter-spacing: -0.015em;
   color: var(--paper);
-  margin: 0 0 0.75rem;
-}
-
-.hero__subline {
-  font-size: 1.1rem;
-  color: var(--mist);
-  margin: 0 0 1.5rem;
-  max-width: 30rem;
+  margin: 0 0 1.75rem;
 }
 
 .hero__cta--button {

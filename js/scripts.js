@@ -15,11 +15,10 @@ document.documentElement.classList.add('js');
   var STAGGER_MS = 60; // locked value, Option B. Ask before changing.
 
   // Explicit reveal order for the hero, independent of any future DOM
-  // reordering: rule, title, subline, CTA, then the 4 credit blocks.
+  // reordering: rule, title, CTA, then the 4 credit blocks.
   var revealEls = [
     document.querySelector('.hero__rule'),
     document.querySelector('.hero__title'),
-    document.querySelector('.hero__subline'),
     document.querySelector('.hero__cta')
   ].concat(Array.prototype.slice.call(document.querySelectorAll('.credit')))
     .filter(Boolean);
