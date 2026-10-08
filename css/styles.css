@@ -7,8 +7,8 @@
   --paper: #FAFAFF;   /* DD cream */
   --ink: #111111;     /* DD gray-dark */
   --indigo: #2E2B8A;  /* DD indigo */
-  --orange: #FC6935;  /* DD orange: PRIMARY background. Ink text only on it (6.48:1); cream on orange fails AA */
-  --sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --orange: #FC6935;  /* DD orange: accent blocks, ink text only (6.48:1); cream on orange fails AA */
+  --sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -29,14 +29,14 @@ a:focus-visible {
   border-radius: 2px;
 }
 
-/* Hero: orange stage (primary brand background), full first viewport.
+/* Hero: white stage (primary background, DD cream #FAFAFF), black text, full first viewport.
    100svh instead of 100vh so mobile Safari's address bar doesn't jump the page. */
 .hero {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   padding: 2rem 2.75rem;
-  background: var(--orange);
+  background: var(--paper);
   color: var(--ink);
 }
 
@@ -54,7 +54,8 @@ a:focus-visible {
   gap: 0.5rem;
   color: var(--ink);
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 .hero__links a {
   color: inherit;
@@ -66,7 +67,7 @@ a:focus-visible {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--indigo);
+  background: var(--orange);
   /* Pulse animation owned by Flux, not added here */
 }
 
@@ -92,9 +93,10 @@ a:focus-visible {
 .hero__title {
   font-family: var(--sans);
   font-weight: 800;
-  font-size: clamp(2.6rem, 1.8rem + 3.6vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.022em;
+  font-size: clamp(2.3rem, 1.5rem + 3.4vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
   color: var(--ink);
   margin: 0 0 1.75rem;
 }
@@ -128,8 +130,9 @@ a:focus-visible {
 .credit__role {
   font-family: var(--sans);
   font-weight: 700;
-  font-size: 1.45rem;
-  letter-spacing: -0.02em;
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 .credit__name {
   font-size: 0.8rem;
@@ -137,8 +140,8 @@ a:focus-visible {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.credit--orange { background: var(--orange); color: var(--ink); }
 .credit--indigo { background: var(--indigo); color: var(--paper); }
-.credit--cream { background: var(--paper); color: var(--ink); }
 .credit--ink { background: var(--ink); color: var(--paper); }
 .credit--line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
 
