@@ -6,11 +6,11 @@
 <!-- SEO:TITLE -->
 <title>[Company]</title>
 <!-- SEO:DESCRIPTION -->
-<meta name="description" content="[Description placeholder for Sage]">
+<meta name="description" content="[Description placeholder]">
 <!-- SEO:OG -->
 <!-- SEO:JSONLD -->
 <!-- Portfolio demo. [Company] is a fictional company and all content is sample content. -->
-<!-- Webfont: Montserrat (OFL, Google Fonts). Sage may self-host later -->
+<!-- Webfont: Montserrat (OFL, Google Fonts) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,10 +51,11 @@
       </div>
     </div>
     <ol class="credits">
-      <li class="credit credit--orange reveal"><span class="credit__role">Research</span><span class="credit__name">Agent 01</span></li>
-      <li class="credit credit--indigo reveal"><span class="credit__role">Operations</span><span class="credit__name">Agent 02</span></li>
-      <li class="credit credit--ink reveal"><span class="credit__role">Support</span><span class="credit__name">Agent 03</span></li>
-      <li class="credit credit--line reveal"><span class="credit__role">Sales</span><span class="credit__name">Agent 04</span></li>
+      <li class="credit credit--orange reveal"><span class="credit__role">Eve</span><span class="credit__name">Lead</span></li>
+      <li class="credit credit--indigo reveal"><span class="credit__role">Atlas</span><span class="credit__name">Research</span></li>
+      <li class="credit credit--ink reveal"><span class="credit__role">Wren</span><span class="credit__name">Copy</span></li>
+      <li class="credit credit--line reveal"><span class="credit__role">Dewey</span><span class="credit__name">Library</span></li>
+      <li class="credit credit--orange reveal"><span class="credit__role">Hex</span><span class="credit__name">Front end</span></li>
     </ol>
   </div>
 </section>
@@ -82,40 +83,34 @@
     <p class="eyebrow reveal">Roster</p>
     <h2 class="section__title reveal">Meet the crew</h2>
     <ul class="crew">
-      <li class="agent agent--orange reveal">
-        <p class="agent__role">Research</p>
-        <h3 class="agent__name">Ada</h3>
-        <p class="agent__line">Reads the sources, keeps the receipts, hands you a brief.</p>
+      <li class="agent agent--orange agent--lead reveal">
+        <p class="agent__role">Lead</p>
+        <h3 class="agent__name">Eve</h3>
+        <p class="agent__line">Hands out the jobs, keeps the board moving, and makes sure what starts gets finished.</p>
         <p class="agent__status">Available</p>
       </li>
       <li class="agent agent--indigo reveal">
-        <p class="agent__role">Operations</p>
-        <h3 class="agent__name">Rune</h3>
-        <p class="agent__line">Watches the queue and moves work before it stalls.</p>
+        <p class="agent__role">Research</p>
+        <h3 class="agent__name">Atlas</h3>
+        <p class="agent__line">Digs into the sources, cross-checks the facts, reports back with a confidence level.</p>
         <p class="agent__status">Available</p>
       </li>
       <li class="agent agent--ink reveal">
-        <p class="agent__role">Support</p>
-        <h3 class="agent__name">Sol</h3>
-        <p class="agent__line">Answers the first message in seconds, at any hour.</p>
+        <p class="agent__role">Copy and images</p>
+        <h3 class="agent__name">Wren</h3>
+        <p class="agent__line">Writes in your voice and finds the images to go with it.</p>
         <p class="agent__status">Available</p>
       </li>
       <li class="agent agent--line reveal">
-        <p class="agent__role">Sales</p>
-        <h3 class="agent__name">Vale</h3>
-        <p class="agent__line">Qualifies inbound, books the call, writes the follow up.</p>
+        <p class="agent__role">Library</p>
+        <h3 class="agent__name">Dewey</h3>
+        <p class="agent__line">Files the notes, links what belongs together, sends a tidy report.</p>
         <p class="agent__status">Available</p>
       </li>
       <li class="agent agent--indigo reveal">
-        <p class="agent__role">Finance</p>
-        <h3 class="agent__name">Juno</h3>
-        <p class="agent__line">Matches invoices, flags what looks off, files the rest.</p>
-        <p class="agent__status">Available</p>
-      </li>
-      <li class="agent agent--orange reveal">
-        <p class="agent__role">Data</p>
-        <h3 class="agent__name">Pike</h3>
-        <p class="agent__line">Cleans the table, joins the sources, keeps the schema honest.</p>
+        <p class="agent__role">Front end</p>
+        <h3 class="agent__name">Hex</h3>
+        <p class="agent__line">Hand codes the page one section at a time, against a locked spec.</p>
         <p class="agent__status">Available</p>
       </li>
     </ul>
@@ -169,32 +164,32 @@
         <aside class="board__side">
           <p class="board__sidelabel">On shift</p>
           <ul class="board__crew">
-            <li><span class="board__dot board__dot--on"></span>Ada<span class="board__meta">Research</span></li>
-            <li><span class="board__dot board__dot--on"></span>Rune<span class="board__meta">Operations</span></li>
-            <li><span class="board__dot board__dot--on"></span>Sol<span class="board__meta">Support</span></li>
-            <li><span class="board__dot"></span>Vale<span class="board__meta">Sales</span></li>
+            <li><span class="board__dot board__dot--on"></span>Eve<span class="board__meta">Lead</span></li>
+            <li><span class="board__dot board__dot--on"></span>Atlas<span class="board__meta">Research</span></li>
+            <li><span class="board__dot board__dot--on"></span>Wren<span class="board__meta">Copy</span></li>
+            <li><span class="board__dot board__dot--on"></span>Dewey<span class="board__meta">Library</span></li>
+            <li><span class="board__dot"></span>Hex<span class="board__meta">Front end</span></li>
           </ul>
         </aside>
         <div class="board__cols">
           <div class="board__col">
             <p class="board__colhead">Queue <span>3</span></p>
-            <article class="task"><p class="task__title">Summarise Q3 supplier contracts</p><p class="task__foot"><span class="tag tag--orange">Ada</span><span class="task__time">Sample 2m</span></p></article>
-            <article class="task"><p class="task__title">Reconcile October invoices</p><p class="task__foot"><span class="tag tag--mist">Juno</span><span class="task__time">Sample 5m</span></p></article>
-            <article class="task"><p class="task__title">Tag inbound from the form</p><p class="task__foot"><span class="tag tag--mist">Vale</span><span class="task__time">Sample 1m</span></p></article>
+            <article class="task"><p class="task__title">Write the launch caption in the client's voice</p><p class="task__foot"><span class="tag tag--mist">Wren</span><span class="task__time">Sample 2m</span></p></article>
+            <article class="task"><p class="task__title">Check the font licences</p><p class="task__foot"><span class="tag tag--orange">Atlas</span><span class="task__time">Sample 5m</span></p></article>
+            <article class="task"><p class="task__title">File this week's research notes</p><p class="task__foot"><span class="tag tag--mist">Dewey</span><span class="task__time">Sample 1m</span></p></article>
           </div>
           <div class="board__col">
             <p class="board__colhead">Running <span>2</span></p>
-            <article class="task task--live"><p class="task__title">Draft replies for 14 open tickets</p><p class="task__bar"><i></i></p><p class="task__foot"><span class="tag tag--orange">Sol</span><span class="task__time">Sample 61%</span></p></article>
-            <article class="task task--live"><p class="task__title">Rebuild the weekly ops report</p><p class="task__bar"><i class="is-short"></i></p><p class="task__foot"><span class="tag tag--mist">Rune</span><span class="task__time">Sample 24%</span></p></article>
+            <article class="task task--live"><p class="task__title">Study 12 tech landing pages</p><p class="task__bar"><i></i></p><p class="task__foot"><span class="tag tag--orange">Atlas</span><span class="task__time">Sample 61%</span></p></article>
+            <article class="task task--live"><p class="task__title">Build the features section</p><p class="task__bar"><i class="is-short"></i></p><p class="task__foot"><span class="tag tag--mist">Hex</span><span class="task__time">Sample 24%</span></p></article>
           </div>
           <div class="board__col">
-            <p class="board__colhead">Done <span>4</span></p>
-            <article class="task task--done"><p class="task__title">Clean the customer table</p><p class="task__foot"><span class="tag tag--mist">Pike</span><span class="task__time">Sample 09:12</span></p></article>
-            <article class="task task--done"><p class="task__title">Book 6 discovery calls</p><p class="task__foot"><span class="tag tag--mist">Vale</span><span class="task__time">Sample 08:40</span></p></article>
-            <article class="task task--done"><p class="task__title">Flag 2 duplicate payments</p><p class="task__foot"><span class="tag tag--mist">Juno</span><span class="task__time">Sample 08:05</span></p></article>
+            <p class="board__colhead">Done <span>3</span></p>
+            <article class="task task--done"><p class="task__title">Push the site live</p><p class="task__foot"><span class="tag tag--mist">Eve</span><span class="task__time">Sample 09:12</span></p></article>
+            <article class="task task--done"><p class="task__title">Send the weekly tidy report</p><p class="task__foot"><span class="tag tag--mist">Dewey</span><span class="task__time">Sample 08:40</span></p></article>
+            <article class="task task--done"><p class="task__title">Brief the crew on the new project</p><p class="task__foot"><span class="tag tag--mist">Eve</span><span class="task__time">Sample 08:05</span></p></article>
           </div>
         </div>
-      </div>
       <div class="board__foot">
         <p class="board__note">Every step an agent takes is written to the log, with the human approval that cleared it.</p>
       </div>
@@ -211,7 +206,7 @@
     <ul class="quotes">
       <li class="quote reveal">
         <p class="quote__label">Sample testimonial</p>
-        <blockquote class="quote__text">We stopped writing the same answer forty times a day. Sol takes the first pass and we read it before it goes.</blockquote>
+        <blockquote class="quote__text">Wren drafts the copy in our voice. We edit a line or two and it goes out.</blockquote>
         <p class="quote__by">R. Advani, Support Lead, Northbank <span>(sample)</span></p>
       </li>
       <li class="quote reveal">
@@ -221,7 +216,7 @@
       </li>
       <li class="quote reveal">
         <p class="quote__label">Sample testimonial</p>
-        <blockquote class="quote__text">Ada hands back a brief with the sources attached. That is the first time research felt checkable.</blockquote>
+        <blockquote class="quote__text">Atlas hands back a brief with the sources attached. That is the first time research felt checkable.</blockquote>
         <p class="quote__by">T. Brennan, Research, Caraway Labs <span>(sample)</span></p>
       </li>
     </ul>
@@ -269,7 +264,7 @@
     <nav class="footer__cols" aria-label="Footer">
       <div class="footer__col">
         <p class="footer__head">Roster</p>
-        <a href="#crew">Research</a><a href="#crew">Operations</a><a href="#crew">Support</a><a href="#crew">Sales</a>
+        <a href="#crew">Eve</a><a href="#crew">Atlas</a><a href="#crew">Wren</a><a href="#crew">Dewey</a><a href="#crew">Hex</a>
       </div>
       <div class="footer__col">
         <p class="footer__head">Product</p>

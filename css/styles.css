@@ -308,6 +308,9 @@ a { color: inherit; text-decoration: none; }
   gap: 1.5rem;
 }
 
+/* Lead card (Eve) spans two columns so five cards sit as 2 + 1, then 3 */
+.agent--lead { grid-column: span 2; }
+
 .agent {
   display: flex;
   flex-direction: column;
@@ -684,6 +687,7 @@ a { color: inherit; text-decoration: none; }
   .section__title { margin-bottom: 2.5rem; }
 
   .crew, .features, .quotes, .steps { grid-template-columns: minmax(0, 1fr); }
+  .agent--lead { grid-column: auto; }
   .strip__logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .board__cols { grid-template-columns: minmax(0, 1fr); }
   .board__crew { grid-template-columns: minmax(0, 1fr); }
