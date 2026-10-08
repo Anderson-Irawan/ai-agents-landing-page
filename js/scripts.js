@@ -14,14 +14,23 @@ document.documentElement.classList.add('js');
 (function () {
   var STAGGER_MS = 60; // locked value, Option B. Ask before changing.
 
-  // Explicit reveal order for the hero, independent of any future DOM
-  // reordering: rule, title, CTA, then the 4 credit blocks.
-  var revealEls = [
-    document.querySelector('.hero__rule'),
-    document.querySelector('.hero__title'),
-    document.querySelector('.hero__cta')
-  ].concat(Array.prototype.slice.call(document.querySelectorAll('.credit')))
-    .filter(Boolean);
+  // Hex 2026-10-08, minimal edit for the v2 page: the old list named only the
+  // hero's elements by hand, so anything with .reveal in the new sections
+  // stayed at opacity 0 forever. Now every .reveal element is observed, in DOM
+  // order. Entrance values and STAGGER_MS are untouched.
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
+  // The stagger counts from 0 again inside each section, so a card late in the
+  // page does not inherit a multi second delay from its document position.
+  var hosts = [];
+  var hostCounts = [];
+  revealEls.forEach(function (el) {
+    var host = el.closest('section, header, footer') || document.body;
+    var k = hosts.indexOf(host);
+    if (k === -1) { k = hosts.length; hosts.push(host); hostCounts.push(0); }
+    el.setAttribute('data-stagger', hostCounts[k]);
+    hostCounts[k] += 1;
+  });
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -34,7 +43,7 @@ document.documentElement.classList.add('js');
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         var el = entry.target;
-        var index = revealEls.indexOf(el);
+        var index = parseInt(el.getAttribute('data-stagger'), 10) || 0;
         if (!reduceMotion) {
           el.style.transitionDelay = (index * STAGGER_MS) + 'ms';
         }

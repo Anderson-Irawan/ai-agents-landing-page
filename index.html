@@ -9,6 +9,7 @@
 <meta name="description" content="[Description placeholder for Sage]">
 <!-- SEO:OG -->
 <!-- SEO:JSONLD -->
+<!-- Portfolio demo. [Company] is a fictional company and all content is sample content. -->
 <!-- Webfont: Montserrat (OFL, Google Fonts). Sage may self-host later -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,16 +19,36 @@
 <script src="js/js-flag.js"></script>
 </head>
 <body>
-<header class="hero">
-  <nav class="hero__nav">
-    <span class="hero__wordmark"><span class="status-dot" title="Now hiring: agent"></span>[Company]</span>
-    <span class="hero__links"><a href="#">Agents</a><a href="#">Jobs</a></span>
-  </nav>
-  <div class="hero__split">
+
+<a class="skip" href="#hero">Skip to content</a>
+
+<!-- Sticky nav, sits above every band. Apple and Stripe both keep one
+     persistent bar over changing section colours. -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="nav__wordmark" href="#hero"><span class="status-dot"></span>[Company]</a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="#crew">Crew</a>
+      <a href="#how">How it works</a>
+      <a href="#board">Board</a>
+      <a href="#features">Features</a>
+    </nav>
+    <a class="nav__cta" href="#cta">Book a demo</a>
+  </div>
+</header>
+
+<main>
+
+<!-- 1. HERO, white band. Apple style: neutral stage, colour lives in blocks. -->
+<section class="hero band band--paper" id="hero">
+  <div class="hero__split container">
     <div class="hero__body">
       <div class="hero__rule reveal"></div>
       <h1 class="hero__title reveal">Hire your next agent</h1>
-      <a class="hero__cta hero__cta--button reveal" href="#">See the roster</a>
+      <div class="hero__actions">
+        <a class="hero__cta hero__cta--button reveal" href="#crew">See the roster</a>
+        <a class="hero__cta hero__cta--ghost reveal" href="#cta">Book a demo</a>
+      </div>
     </div>
     <ol class="credits">
       <li class="credit credit--orange reveal"><span class="credit__role">Research</span><span class="credit__name">Agent 01</span></li>
@@ -36,9 +57,235 @@
       <li class="credit credit--line reveal"><span class="credit__role">Sales</span><span class="credit__name">Agent 04</span></li>
     </ol>
   </div>
-</header>
-<!-- Sections below the hero come next, one pass at a time -->
-<main class="page"></main>
+</section>
+
+<!-- 2. LOGO STRIP, ink band. Hard cut white to ink, narrow. Cohere and Notion
+     both run a trust strip straight under the hero. -->
+<section class="band band--ink strip" aria-label="Sample clients">
+  <div class="container strip__inner">
+    <p class="strip__label reveal">Sample clients</p>
+    <ul class="strip__logos">
+      <li class="strip__logo reveal">Northbank</li>
+      <li class="strip__logo reveal">Fieldnote</li>
+      <li class="strip__logo reveal">Caraway Labs</li>
+      <li class="strip__logo reveal">Orbit Supply</li>
+      <li class="strip__logo reveal">Halden &amp; Co</li>
+      <li class="strip__logo reveal">Plainsight</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. MEET THE CREW, white band, coloured cards. Notion's coloured card trio
+     stretched to a six card roster. -->
+<section class="band band--paper section" id="crew">
+  <div class="container">
+    <p class="eyebrow reveal">Roster</p>
+    <h2 class="section__title reveal">Meet the crew</h2>
+    <ul class="crew">
+      <li class="agent agent--orange reveal">
+        <p class="agent__role">Research</p>
+        <h3 class="agent__name">Ada</h3>
+        <p class="agent__line">Reads the sources, keeps the receipts, hands you a brief.</p>
+        <p class="agent__status">Available</p>
+      </li>
+      <li class="agent agent--indigo reveal">
+        <p class="agent__role">Operations</p>
+        <h3 class="agent__name">Rune</h3>
+        <p class="agent__line">Watches the queue and moves work before it stalls.</p>
+        <p class="agent__status">Available</p>
+      </li>
+      <li class="agent agent--ink reveal">
+        <p class="agent__role">Support</p>
+        <h3 class="agent__name">Sol</h3>
+        <p class="agent__line">Answers the first message in seconds, at any hour.</p>
+        <p class="agent__status">Available</p>
+      </li>
+      <li class="agent agent--line reveal">
+        <p class="agent__role">Sales</p>
+        <h3 class="agent__name">Vale</h3>
+        <p class="agent__line">Qualifies inbound, books the call, writes the follow up.</p>
+        <p class="agent__status">Available</p>
+      </li>
+      <li class="agent agent--indigo reveal">
+        <p class="agent__role">Finance</p>
+        <h3 class="agent__name">Juno</h3>
+        <p class="agent__line">Matches invoices, flags what looks off, files the rest.</p>
+        <p class="agent__status">Available</p>
+      </li>
+      <li class="agent agent--orange reveal">
+        <p class="agent__role">Data</p>
+        <h3 class="agent__name">Pike</h3>
+        <p class="agent__line">Cleans the table, joins the sources, keeps the schema honest.</p>
+        <p class="agent__status">Available</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4. HOW IT WORKS, orange chapter band, ink text only. Stripe's chapter
+     band, Apple's hard colour cut as the only separator. -->
+<section class="band band--orange section" id="how">
+  <div class="container">
+    <p class="eyebrow reveal">Process</p>
+    <h2 class="section__title reveal">How it works</h2>
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step__num">01</span>
+        <h3 class="step__title">Brief the role</h3>
+        <p class="step__line">Describe the job in plain language. No prompt writing.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">02</span>
+        <h3 class="step__title">Pick the agent</h3>
+        <p class="step__line">Hire one from the roster, or put a small crew together.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">03</span>
+        <h3 class="step__title">Connect the tools</h3>
+        <p class="step__line">Give the agent access to the systems the job runs on.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">04</span>
+        <h3 class="step__title">Watch the work</h3>
+        <p class="step__line">Every task and every decision lands on one board.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5. PRODUCT VISUAL, indigo chapter band. Task board mock built in HTML and
+     CSS only, no images. Linear's UI panels, Stripe's dark chapter block. -->
+<section class="band band--indigo section" id="board">
+  <div class="container">
+    <p class="eyebrow reveal">Product</p>
+    <h2 class="section__title reveal">The task board</h2>
+    <div class="board reveal">
+      <div class="board__chrome">
+        <span class="board__dots"><i></i><i></i><i></i></span>
+        <span class="board__path">[Company] / Roster board</span>
+        <span class="board__chip">Sample data</span>
+      </div>
+      <div class="board__body">
+        <aside class="board__side">
+          <p class="board__sidelabel">On shift</p>
+          <ul class="board__crew">
+            <li><span class="board__dot board__dot--on"></span>Ada<span class="board__meta">Research</span></li>
+            <li><span class="board__dot board__dot--on"></span>Rune<span class="board__meta">Operations</span></li>
+            <li><span class="board__dot board__dot--on"></span>Sol<span class="board__meta">Support</span></li>
+            <li><span class="board__dot"></span>Vale<span class="board__meta">Sales</span></li>
+          </ul>
+        </aside>
+        <div class="board__cols">
+          <div class="board__col">
+            <p class="board__colhead">Queue <span>3</span></p>
+            <article class="task"><p class="task__title">Summarise Q3 supplier contracts</p><p class="task__foot"><span class="tag tag--orange">Ada</span><span class="task__time">Sample 2m</span></p></article>
+            <article class="task"><p class="task__title">Reconcile October invoices</p><p class="task__foot"><span class="tag tag--mist">Juno</span><span class="task__time">Sample 5m</span></p></article>
+            <article class="task"><p class="task__title">Tag inbound from the form</p><p class="task__foot"><span class="tag tag--mist">Vale</span><span class="task__time">Sample 1m</span></p></article>
+          </div>
+          <div class="board__col">
+            <p class="board__colhead">Running <span>2</span></p>
+            <article class="task task--live"><p class="task__title">Draft replies for 14 open tickets</p><p class="task__bar"><i></i></p><p class="task__foot"><span class="tag tag--orange">Sol</span><span class="task__time">Sample 61%</span></p></article>
+            <article class="task task--live"><p class="task__title">Rebuild the weekly ops report</p><p class="task__bar"><i class="is-short"></i></p><p class="task__foot"><span class="tag tag--mist">Rune</span><span class="task__time">Sample 24%</span></p></article>
+          </div>
+          <div class="board__col">
+            <p class="board__colhead">Done <span>4</span></p>
+            <article class="task task--done"><p class="task__title">Clean the customer table</p><p class="task__foot"><span class="tag tag--mist">Pike</span><span class="task__time">Sample 09:12</span></p></article>
+            <article class="task task--done"><p class="task__title">Book 6 discovery calls</p><p class="task__foot"><span class="tag tag--mist">Vale</span><span class="task__time">Sample 08:40</span></p></article>
+            <article class="task task--done"><p class="task__title">Flag 2 duplicate payments</p><p class="task__foot"><span class="tag tag--mist">Juno</span><span class="task__time">Sample 08:05</span></p></article>
+          </div>
+        </div>
+      </div>
+      <div class="board__foot">
+        <p class="board__note">Every step an agent takes is written to the log, with the human approval that cleared it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PROOF, white band, bordered quote cards. Notion and Linear both park
+     their quote trio on a neutral canvas. -->
+<section class="band band--paper section" id="proof">
+  <div class="container">
+    <p class="eyebrow reveal">Proof</p>
+    <h2 class="section__title reveal">What the work looks like</h2>
+    <ul class="quotes">
+      <li class="quote reveal">
+        <p class="quote__label">Sample testimonial</p>
+        <blockquote class="quote__text">We stopped writing the same answer forty times a day. Sol takes the first pass and we read it before it goes.</blockquote>
+        <p class="quote__by">R. Advani, Support Lead, Northbank <span>(sample)</span></p>
+      </li>
+      <li class="quote reveal">
+        <p class="quote__label">Sample testimonial</p>
+        <blockquote class="quote__text">The board is the part that sold us. We can see what the crew is doing without asking anyone.</blockquote>
+        <p class="quote__by">M. Oyelaran, Operations, Fieldnote <span>(sample)</span></p>
+      </li>
+      <li class="quote reveal">
+        <p class="quote__label">Sample testimonial</p>
+        <blockquote class="quote__text">Ada hands back a brief with the sources attached. That is the first time research felt checkable.</blockquote>
+        <p class="quote__by">T. Brennan, Research, Caraway Labs <span>(sample)</span></p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 7. FEATURES, ink band, dark card grid. DeepMind and Linear both run their
+     capability grid as bordered cards on near black. -->
+<section class="band band--ink section" id="features">
+  <div class="container">
+    <p class="eyebrow reveal">Standard on every agent</p>
+    <h2 class="section__title reveal">What ships with the hire</h2>
+    <ul class="features">
+      <li class="feature reveal"><h3 class="feature__title">Audit trail</h3><p class="feature__line">Every action, input and output written down and searchable.</p></li>
+      <li class="feature reveal"><h3 class="feature__title">Human approval</h3><p class="feature__line">Set the steps an agent may never take on its own.</p></li>
+      <li class="feature reveal"><h3 class="feature__title">Tool access</h3><p class="feature__line">Scoped keys per agent, revoked from one screen.</p></li>
+      <li class="feature reveal"><h3 class="feature__title">Guardrails</h3><p class="feature__line">Spend, rate and data limits you set before the first run.</p></li>
+      <li class="feature reveal"><h3 class="feature__title">Handover</h3><p class="feature__line">An agent passes a task to a teammate with its full context.</p></li>
+      <li class="feature reveal"><h3 class="feature__title">Reporting</h3><p class="feature__line">A weekly read on what the crew finished and what it blocked on.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8. CLOSING CTA, orange bookend. Ink text only on orange. -->
+<section class="band band--orange cta" id="cta">
+  <div class="container cta__inner">
+    <h2 class="cta__title reveal">Put the crew to work</h2>
+    <div class="cta__actions">
+      <a class="btn btn--ink reveal" href="#">Book a demo</a>
+      <a class="btn btn--outline reveal" href="#crew">See the roster</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER, ink band. Anthropic and Figma both cut hard to a near black
+     footer as the last separator on the page. -->
+<footer class="band band--ink footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <p class="footer__wordmark">[Company]</p>
+      <p class="footer__line">A roster of agents you hire by the role.</p>
+    </div>
+    <nav class="footer__cols" aria-label="Footer">
+      <div class="footer__col">
+        <p class="footer__head">Roster</p>
+        <a href="#crew">Research</a><a href="#crew">Operations</a><a href="#crew">Support</a><a href="#crew">Sales</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__head">Product</p>
+        <a href="#board">Task board</a><a href="#features">Guardrails</a><a href="#features">Audit trail</a><a href="#how">How it works</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__head">Company</p>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a><a href="#">Privacy</a>
+      </div>
+    </nav>
+  </div>
+  <div class="container footer__base">
+    <p>Portfolio demo. [Company] is a fictional company and every logo, quote and figure on this page is sample content.</p>
+  </div>
+</footer>
+
 <script src="js/scripts.js" defer></script>
 </body>
 </html>

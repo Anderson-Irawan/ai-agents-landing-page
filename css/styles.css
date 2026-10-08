@@ -1,66 +1,155 @@
-/* Agency Roster, production hero. Layout locked from color-variants.html
-   panel "Picked: B + C". Colours: Double Dash Creative brand palette
-   (doubledashcreative.com, 2026-10-07). Do not change hexes without Anderson. */
+/* [Company], Agency Roster landing page, v2.
+   Double Dash Creative palette (doubledashcreative.com, 2026-10-07).
+   White #FAFAFF is the page base, black #111111 the text. Orange and indigo
+   are full-bleed chapter bands only, per Atlas's research. Do not change the
+   hexes without Anderson.
+
+   Separation rule for this page: every section boundary is a hard full-bleed
+   background change (Apple, Stripe). No thin rules are used as separators.
+
+   Spacing: 8px scale, expressed in rem (0.5rem = 8px). */
 
 :root {
-  /* Double Dash brand */
-  --paper: #FAFAFF;   /* DD cream */
-  --ink: #111111;     /* DD gray-dark */
-  --indigo: #2E2B8A;  /* DD indigo */
-  --orange: #FC6935;  /* DD orange: accent blocks, ink text only (6.48:1); cream on orange fails AA */
+  /* Locked brand hexes */
+  --paper: #FAFAFF;        /* DD cream, page base */
+  --ink: #111111;          /* DD gray-dark, body text */
+  --indigo: #2E2B8A;       /* DD indigo, chapter band, cream text */
+  --orange: #FC6935;       /* DD orange, chapter band, INK TEXT ONLY (6.48:1) */
+
+  /* Derived neutrals, each checked against its own background */
+  --ink-dim: #4A4A4A;      /* secondary text on paper, 8.50:1 */
+  --paper-dim: #B4B3B7;    /* secondary text on ink, 9.09:1 */
+  --mist: #D4D3F2;         /* secondary text on indigo, 7.87:1 */
+  --ink-surface: #1C1C1F;  /* card face inside the ink band */
+  --ink-line: #33333A;     /* card border inside the ink band */
+  --indigo-surface: #272471; /* panel face inside the indigo band */
+  --indigo-line: #4B48A8;  /* panel border inside the indigo band */
+
   --sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --nav-h: 4.5rem;         /* 72px */
+  --gutter: 2.75rem;       /* page side padding, desktop */
+  --block: 7rem;           /* section vertical padding, desktop */
 }
 
 * { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
+  font-weight: 500;
+  line-height: 1.45;
+  /* No overflow-x:hidden here on purpose. On <body> it makes the body the
+     scrolling box, which stops IntersectionObserver with the default root from
+     ever firing, so every .reveal element would stay hidden. Overflow is
+     prevented by minmax(0, ...) grid tracks instead. */
 }
 
-a { color: inherit; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
-/* Focus state for keyboard users, every link in the hero */
-a:focus-visible {
-  outline: 2px solid var(--ink);
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { list-style: none; padding: 0; }
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid currentColor;
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* Hero: white stage (primary background, DD cream #FAFAFF), black text, full first viewport.
-   100svh instead of 100vh so mobile Safari's address bar doesn't jump the page. */
-.hero {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 2.75rem;
-  background: var(--paper);
-  color: var(--ink);
+.skip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  clip-path: inset(50%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+.skip:focus { clip-path: none; left: 0.5rem; top: 0.5rem; }
+
+/* ---------------------------------------------------------------
+   Bands and container
+   A band is full bleed. The container holds the measured content.
+   --------------------------------------------------------------- */
+
+.band { width: 100%; }
+.band--paper { background: var(--paper); color: var(--ink); }
+.band--ink { background: var(--ink); color: var(--paper); }
+.band--indigo { background: var(--indigo); color: var(--paper); }
+.band--orange { background: var(--orange); color: var(--ink); }
+
+.container {
+  width: 100%;
+  max-width: 75rem; /* 1200px */
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
-.hero__nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.95rem;
-  font-weight: 500;
+.section { padding: var(--block) 0; }
+
+/* ---------------------------------------------------------------
+   Sticky nav
+   --------------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
   color: var(--ink);
+  border-bottom: 1.5px solid var(--ink);
 }
-.hero__wordmark {
+
+.nav__inner {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav__wordmark {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--ink);
   font-weight: 800;
+  font-size: 1rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
-.hero__links a {
-  color: inherit;
-  text-decoration: none;
-  margin-left: 1.5rem;
+
+.nav__links {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.nav__links a { padding: 0.25rem 0; border-bottom: 2px solid transparent; }
+.nav__links a:hover { border-bottom-color: var(--orange); }
+
+.nav__cta {
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
 .status-dot {
@@ -68,95 +157,539 @@ a:focus-visible {
   height: 9px;
   border-radius: 50%;
   background: var(--orange);
-  /* Pulse animation owned by Flux, not added here */
+  flex: none;
+  /* Pulse animation lives in motion.css, owned by Flux */
 }
 
-/* Split: copy on the left, credits roll on the right, like the mock's variant--bc */
+/* ---------------------------------------------------------------
+   1. Hero, white band
+   --------------------------------------------------------------- */
+
+/* 100svh minus the nav, so the mobile Safari address bar cannot cause a jump */
+.hero {
+  min-height: calc(100svh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  padding: 4.5rem 0 5rem;
+}
+
 .hero__split {
-  flex: 1;
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 4rem;
   align-items: center;
 }
 
-.hero__body { margin: auto 0; }
-
 .hero__rule {
-  height: 2px;
-  width: 2.5rem;
-  background: var(--ink);
-  margin-bottom: 1rem;
+  height: 3px;
+  width: 3.5rem;
+  background: var(--orange);
+  margin-bottom: 1.5rem;
 }
 
-/* Fluid title: scales with viewport width, clamped between mobile and the mock's 4.2rem-at-1100px proportion */
 .hero__title {
-  font-family: var(--sans);
   font-weight: 800;
-  font-size: clamp(2.3rem, 1.5rem + 3.4vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.5rem, 1.4rem + 4.4vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: var(--ink);
-  margin: 0 0 1.75rem;
+  margin: 0 0 2.5rem;
 }
 
-.hero__cta--button {
+.hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+.hero__cta {
   display: inline-block;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 0.8rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1rem 1.75rem;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--paper);
 }
+.hero__cta--button { background: var(--ink); color: var(--paper); }
+.hero__cta--ghost { color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
 
-/* Credits roll */
-.credits {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.5rem;
-}
+/* Credits roll, the roster read as a cast list */
+.credits { display: grid; gap: 0.5rem; }
+
 .credit {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0.9rem 1.1rem;
-  color: var(--paper);
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
   border-radius: 4px;
 }
 .credit__role {
-  font-family: var(--sans);
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 .credit__name {
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .credit--orange { background: var(--orange); color: var(--ink); }
 .credit--indigo { background: var(--indigo); color: var(--paper); }
 .credit--ink { background: var(--ink); color: var(--paper); }
-.credit--line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.credit--line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
 
-/* Under 800px: credits stack below the copy instead of sitting beside it */
-@media (max-width: 800px) {
-  .hero__split {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    /* Anderson: credits sit close under the CTA. Group both rows and centre
-       them, instead of letting the two rows stretch apart to fill 100svh. */
-    align-content: center;
-  }
-  .hero__body { margin: 0; }
+/* ---------------------------------------------------------------
+   Shared section headings
+   --------------------------------------------------------------- */
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.band--paper .eyebrow { color: var(--ink-dim); }
+.band--ink .eyebrow { color: var(--paper-dim); }
+.band--indigo .eyebrow { color: var(--mist); }
+.band--orange .eyebrow { color: var(--ink); }
+
+.section__title {
+  font-weight: 800;
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  margin-bottom: 3.5rem;
+  max-width: 20ch;
 }
 
-.page {
-  /* Placeholder for the next sections, built one pass at a time */
+/* ---------------------------------------------------------------
+   2. Logo strip, ink band
+   --------------------------------------------------------------- */
+
+.strip { padding: 3rem 0; }
+
+.strip__inner { display: grid; gap: 1.5rem; }
+
+.strip__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+
+.strip__logos {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.strip__logo {
+  font-size: clamp(0.8125rem, 0.6rem + 0.5vw, 1.0625rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--paper);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------------------------------------------------------------
+   3. Meet the crew, white band, coloured cards
+   --------------------------------------------------------------- */
+
+.crew {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.agent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem;
+  border-radius: 6px;
+  min-height: 15rem;
+}
+.agent__role {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.agent__name {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.agent__line { font-size: 0.9375rem; font-weight: 500; }
+.agent__status {
+  margin-top: auto;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.agent--orange { background: var(--orange); color: var(--ink); }
+.agent--indigo { background: var(--indigo); color: var(--paper); }
+.agent--ink { background: var(--ink); color: var(--paper); }
+.agent--line { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+
+.agent--indigo .agent__role, .agent--indigo .agent__status { color: var(--mist); }
+.agent--ink .agent__role, .agent--ink .agent__status { color: var(--paper-dim); }
+.agent--line .agent__role, .agent--line .agent__status { color: var(--ink-dim); }
+
+/* ---------------------------------------------------------------
+   4. How it works, orange band. Ink text only, never cream.
+   --------------------------------------------------------------- */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.step {
+  border-top: 2px solid var(--ink);
+  padding-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+.step__num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.step__title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.step__line { font-size: 0.9375rem; font-weight: 500; }
+
+/* ---------------------------------------------------------------
+   5. Task board mock, indigo band. Pure HTML and CSS, no images.
+   --------------------------------------------------------------- */
+
+.board {
+  background: var(--indigo-surface);
+  border: 1.5px solid var(--indigo-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.board__chrome {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1.5px solid var(--indigo-line);
+}
+.board__dots { display: flex; gap: 0.375rem; flex: none; }
+.board__dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--indigo-line); }
+.board__dots i:first-child { background: var(--orange); }
+.board__path {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mist);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.board__chip {
+  margin-left: auto;
+  flex: none;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--orange);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+}
+
+.board__body {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+}
+
+.board__side {
+  padding: 1.25rem;
+  border-right: 1.5px solid var(--indigo-line);
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+.board__sidelabel {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+.board__crew { display: grid; gap: 0.75rem; }
+.board__crew li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--paper);
+}
+.board__dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--indigo-line); flex: none;
+}
+.board__dot--on { background: var(--orange); }
+.board__meta {
+  margin-left: auto;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.board__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+}
+.board__col { display: grid; gap: 0.75rem; align-content: start; }
+.board__colhead {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mist);
+  padding-bottom: 0.5rem;
+  border-bottom: 1.5px solid var(--indigo-line);
+}
+
+.task {
+  background: var(--indigo);
+  border: 1.5px solid var(--indigo-line);
+  border-radius: 6px;
+  padding: 0.875rem;
+  display: grid;
+  gap: 0.625rem;
+}
+.task__title { font-size: 0.8125rem; font-weight: 600; color: var(--paper); line-height: 1.35; }
+.task__foot { display: flex; align-items: center; gap: 0.5rem; }
+.task__time {
+  margin-left: auto;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+.task__bar { height: 4px; border-radius: 2px; background: var(--indigo-line); overflow: hidden; }
+.task__bar i { display: block; height: 100%; width: 61%; background: var(--orange); }
+.task__bar i.is-short { width: 24%; }
+.task--done .task__title { color: var(--mist); }
+
+.tag {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.1875rem 0.4375rem;
+  border-radius: 3px;
+}
+.tag--orange { background: var(--orange); color: var(--ink); }
+.tag--mist { background: var(--mist); color: var(--ink); }
+
+.board__foot {
+  padding: 1.25rem;
+  border-top: 1.5px solid var(--indigo-line);
+}
+.board__note { font-size: 0.8125rem; font-weight: 500; color: var(--mist); max-width: 60ch; }
+
+/* ---------------------------------------------------------------
+   6. Proof, white band, bordered quote cards
+   --------------------------------------------------------------- */
+
+.quotes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+}
+.quote__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--orange);
+  align-self: start;
+  padding: 0.3125rem 0.5rem;
+  border-radius: 3px;
+}
+.quote__text { font-size: 1.0625rem; font-weight: 600; line-height: 1.4; }
+.quote__by {
+  margin-top: auto;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.quote__by span { font-weight: 500; text-transform: none; letter-spacing: 0; }
+
+/* ---------------------------------------------------------------
+   7. Features, ink band, dark card grid
+   --------------------------------------------------------------- */
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.feature {
+  background: var(--ink-surface);
+  border: 1.5px solid var(--ink-line);
+  border-radius: 6px;
+  padding: 2rem;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+.feature__title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.feature__line { font-size: 0.9375rem; font-weight: 500; color: var(--paper-dim); }
+
+/* ---------------------------------------------------------------
+   8. Closing CTA, orange bookend
+   --------------------------------------------------------------- */
+
+.cta { padding: var(--block) 0; }
+.cta__inner { display: grid; gap: 2.5rem; justify-items: start; }
+.cta__title {
+  font-weight: 800;
+  font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  max-width: 16ch;
+}
+.cta__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+.btn {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1rem 1.75rem;
+  border-radius: 999px;
+}
+.btn--ink { background: var(--ink); color: var(--paper); }
+.btn--outline { color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* ---------------------------------------------------------------
+   Footer, ink band
+   --------------------------------------------------------------- */
+
+.footer { padding: 5rem 0 2.5rem; }
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 3rem;
+  padding-bottom: 3.5rem;
+}
+.footer__wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.footer__line { font-size: 0.9375rem; color: var(--paper-dim); max-width: 28ch; }
+
+.footer__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.footer__col { display: grid; gap: 0.625rem; align-content: start; font-size: 0.875rem; }
+.footer__col a { color: var(--paper-dim); }
+.footer__col a:hover { color: var(--paper); }
+.footer__head {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 0.25rem;
+}
+
+.footer__base {
+  border-top: 1.5px solid var(--ink-line);
+  padding-top: 2rem;
+}
+.footer__base p { font-size: 0.75rem; color: var(--paper-dim); }
+
+/* ---------------------------------------------------------------
+   Breakpoints
+   --------------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .crew, .features, .quotes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strip__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .board__body { grid-template-columns: minmax(0, 1fr); }
+  .board__side { border-right: 0; border-bottom: 1.5px solid var(--indigo-line); }
+  .board__crew { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 800px) {
+  :root { --gutter: 1.25rem; --block: 4.5rem; --nav-h: 4rem; }
+
+  .nav__links { display: none; }
+  .nav__cta { margin-left: auto; }
+
+  .hero { padding: 3rem 0 4rem; }
+  .hero__split { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; align-content: center; }
+
+  .section__title { margin-bottom: 2.5rem; }
+
+  .crew, .features, .quotes, .steps { grid-template-columns: minmax(0, 1fr); }
+  .strip__logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .board__cols { grid-template-columns: minmax(0, 1fr); }
+  .board__crew { grid-template-columns: minmax(0, 1fr); }
+  .agent { min-height: 0; padding: 1.5rem; }
+  .quote, .feature { padding: 1.5rem; }
+
+  .footer__inner { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
