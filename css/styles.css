@@ -1,18 +1,15 @@
-/* Agency Roster, production hero. Colour, type and layout locked from
-   color-variants.html panel "Picked: B + C" (variant--bc). Do not change hexes. */
+/* Agency Roster, production hero. Layout locked from color-variants.html
+   panel "Picked: B + C". Colours: Double Dash Creative brand palette
+   (doubledashcreative.com, 2026-10-07). Do not change hexes without Anderson. */
 
 :root {
-  --paper: #F7F3EC;
-  --surface: #EAE2D3;
-  --ink: #201C16;
-  --muted: #6E6459;
-  --indigo: #2F3B63;
-  --mustard: #8F5F17;
-  --terracotta: #B5502E;
-  --sage: #4B6B3F;
-  --tint: #E7DCC4;
-  --gold: #E8C06A;
-  --mist: #C9CDE0;
+  /* Double Dash brand */
+  --paper: #FAFAFF;   /* DD cream */
+  --ink: #111111;     /* DD gray-dark */
+  --indigo: #2E2B8A;  /* DD indigo */
+  --orange: #FC6935;  /* DD orange: accents, CTA, ink text only (cream on orange fails AA) */
+  /* Derived */
+  --mist: #D4D3F2;    /* nav on indigo, 7.87:1 */
   --serif: 'Instrument Serif', Georgia, serif;
   --sans: 'General Sans', system-ui, sans-serif;
 }
@@ -30,7 +27,7 @@ a { color: inherit; }
 
 /* Focus state for keyboard users, every link in the hero */
 a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--orange);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -69,7 +66,7 @@ a:focus-visible {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--orange);
   /* Pulse animation owned by Flux, not added here */
 }
 
@@ -87,7 +84,7 @@ a:focus-visible {
 .hero__rule {
   height: 2px;
   width: 2.5rem;
-  background: var(--gold);
+  background: var(--orange);
   margin-bottom: 1rem;
 }
 
@@ -108,7 +105,7 @@ a:focus-visible {
   text-decoration: none;
   padding: 0.8rem 1.4rem;
   border-radius: 999px;
-  background: var(--gold);
+  background: var(--orange);
   color: var(--ink);
 }
 
@@ -138,10 +135,10 @@ a:focus-visible {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.credit--ter { background: var(--terracotta); }
-.credit--gold { background: var(--gold); color: var(--ink); }
-.credit--sag { background: var(--sage); }
-.credit--pap { background: var(--paper); color: var(--ink); }
+.credit--orange { background: var(--orange); color: var(--ink); }
+.credit--cream { background: var(--paper); color: var(--ink); }
+.credit--ink { background: var(--ink); color: var(--paper); }
+.credit--line { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 1.5px var(--paper); }
 
 /* Under 800px: credits stack below the copy instead of sitting beside it */
 @media (max-width: 800px) {
